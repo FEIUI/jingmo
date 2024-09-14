@@ -30,6 +30,12 @@ interface ChineseKnowledgeDao {
     @Query("select k.*from chinese_knowledge k where k.id = (select id from chinese_knowledge order by random() limit 1) limit 1")
     fun random(): Flow<KnowledgeEntity>
 
+    @Query("select id from chinese_knowledge where id > :id order by id asc limit 1")
+    fun getNextId(id: Int): Flow<Int?>
+
+    @Query("select id from chinese_knowledge where id < :id order by id desc limit 1")
+    fun getPrevId(id: Int): Flow<Int?>
+
     @Transaction
     @Query("select * from chinese_knowledge join chinese_knowledge_fts on chinese_knowledge_fts.rowid = chinese_knowledge.id where chinese_knowledge_fts match :query")
     fun search(query: String): Flow<List<KnowledgeEntity>>
@@ -48,4 +54,7 @@ interface ChineseKnowledgeDao {
 
     @Query("delete from chinese_knowledge_collections where id = :id")
     suspend fun uncollect(id: Int)
+
+    @Query("delete from chinese_knowledge")
+    suspend fun clear()
 }

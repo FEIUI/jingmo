@@ -34,10 +34,10 @@ interface ClassicalLiteratureClassicPoemDao {
     fun total(): Flow<Int>
 
     @Query("select id from classic_poems where id > :id order by id limit 1")
-    fun getNextId(id: Int): Flow<Int>
+    fun getNextId(id: Int): Flow<Int?>
 
     @Query("select id from classic_poems where id < :id order by id desc limit 1")
-    fun getPrevId(id: Int): Flow<Int>
+    fun getPrevId(id: Int): Flow<Int?>
 
     @Query("select * from classic_poem_collections where id = :id limit 1")
     fun isCollect(id: Int): Flow<ClassicPoemCollectionEntity?>
@@ -54,4 +54,7 @@ interface ClassicalLiteratureClassicPoemDao {
     @Transaction
     @Query("select * from classic_poems join classic_poems_fts on classic_poems_fts.rowid = classic_poems.id where classic_poems_fts match :query")
     fun search(query: String): Flow<List<ClassicPoemEntity>>
+
+    @Query("delete from classic_poems")
+    suspend fun clear()
 }
