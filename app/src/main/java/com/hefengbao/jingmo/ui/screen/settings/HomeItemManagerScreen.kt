@@ -39,6 +39,7 @@ fun HomeItemManagerRoute(
     HomeItemManagerScreen(
         onBackClick = onBackClick,
         homeItem = homeItem,
+        setChinaWorldCultureHeritage = viewModel::setChinaWorldCultureHeritage,
         setClassicalLiteratureClassicPoem = { viewModel.setClassicalLiteratureClassicPoem(it) },
         setClassicalLiteraturePeople = { viewModel.setClassicalLiteraturePeople(it) },
         setClassicalLiteratureSentence = { viewModel.setClassicalLiteratureSentence(it) },
@@ -50,6 +51,7 @@ fun HomeItemManagerRoute(
         setChineseKnowledge = { viewModel.setChineseKnowledge(it) },
         setChineseLyric = { viewModel.setChineseLyric(it) },
         setChineseProverb = { viewModel.setChineseProverb(it) },
+        setChineseQuote = viewModel::setChineseQuote,
         setChineseRiddle = { viewModel.setChineseRiddle(it) },
         setChineseTongueTwister = { viewModel.setChineseTongueTwister(it) },
         setChineseWisecrack = { viewModel.setChineseWisecrack(it) },
@@ -64,6 +66,7 @@ private fun HomeItemManagerScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     homeItem: HomeItem,
+    setChinaWorldCultureHeritage: (Boolean) -> Unit,
     setClassicalLiteratureClassicPoem: (Boolean) -> Unit,
     setClassicalLiteraturePeople: (Boolean) -> Unit,
     setClassicalLiteratureSentence: (Boolean) -> Unit,
@@ -75,6 +78,7 @@ private fun HomeItemManagerScreen(
     setChineseKnowledge: (Boolean) -> Unit,
     setChineseLyric: (Boolean) -> Unit,
     setChineseProverb: (Boolean) -> Unit,
+    setChineseQuote: (Boolean) -> Unit,
     setChineseRiddle: (Boolean) -> Unit,
     setChineseTongueTwister: (Boolean) -> Unit,
     setChineseWisecrack: (Boolean) -> Unit,
@@ -160,6 +164,11 @@ private fun HomeItemManagerScreen(
                 checked = homeItem.chineseKnowledge,
                 onCheckedChange = setChineseKnowledge
             )
+            Item(
+                title = "句子",
+                checked = homeItem.chineseQuote,
+                onCheckedChange = setChineseQuote
+            )
             SettingsTitle(title = "传统文化")
             Item(
                 title = "节日",
@@ -175,6 +184,12 @@ private fun HomeItemManagerScreen(
                 title = "颜色",
                 checked = homeItem.traditionalCultureColor,
                 onCheckedChange = setTraditionalCultureColor
+            )
+            SettingsTitle(title = "中国")
+            Item(
+                title = "世界文化遗产",
+                checked = homeItem.chinaWorldCulturalHeritage,
+                onCheckedChange = setChinaWorldCultureHeritage
             )
         }
     }

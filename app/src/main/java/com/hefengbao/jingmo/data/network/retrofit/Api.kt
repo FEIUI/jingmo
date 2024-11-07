@@ -10,6 +10,7 @@
 package com.hefengbao.jingmo.data.network.retrofit
 
 import com.hefengbao.jingmo.data.model.Dataset
+import com.hefengbao.jingmo.data.model.china.WorldCulturalHeritage
 import com.hefengbao.jingmo.data.model.chinese.AntitheticalCouplet
 import com.hefengbao.jingmo.data.model.chinese.ChineseKnowledge
 import com.hefengbao.jingmo.data.model.chinese.ChineseWisecrack
@@ -18,6 +19,7 @@ import com.hefengbao.jingmo.data.model.chinese.ExpressionWrapper
 import com.hefengbao.jingmo.data.model.chinese.IdiomWrapper
 import com.hefengbao.jingmo.data.model.chinese.Lyric
 import com.hefengbao.jingmo.data.model.chinese.Proverb
+import com.hefengbao.jingmo.data.model.chinese.Quote
 import com.hefengbao.jingmo.data.model.chinese.Riddle
 import com.hefengbao.jingmo.data.model.chinese.TongueTwister
 import com.hefengbao.jingmo.data.model.classicalliterature.ClassicPoem
@@ -32,6 +34,9 @@ interface Api {
     @GET("dataset.json")
     suspend fun dataset(): List<Dataset>
 
+    @GET("china_world_cultural_heritage.json")
+    suspend fun chinaWorldCultureHeritage(): List<WorldCulturalHeritage>
+
     @GET("expressions_{page}.json")
     suspend fun chineseExpressions(
         @Path("page") page: Int
@@ -45,6 +50,9 @@ interface Api {
 
     @GET("chinese_wisecracks.json")
     suspend fun chineseWisecracks(): List<ChineseWisecrack>
+
+    @GET("chinese_quotes.json")
+    suspend fun chineseQuotes(): List<Quote>
 
     @GET("classic_poems.json")
     suspend fun classicPoems(): List<ClassicPoem>

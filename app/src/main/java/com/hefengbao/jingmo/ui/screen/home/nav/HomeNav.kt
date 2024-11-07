@@ -18,6 +18,7 @@ const val ROUTE_HOME_GRAPH = "home_graph"
 private const val ROUTE_HOME = "home"
 
 fun NavGraphBuilder.homeGraph(
+    onChinaWorldCultureHeritageClick: () -> Unit,
     onChineseAntitheticalCoupletClick: () -> Unit,
     onChineseCharacterClick: () -> Unit,
     onChineseExpressionClick: () -> Unit,
@@ -25,6 +26,7 @@ fun NavGraphBuilder.homeGraph(
     onChineseKnowledgeClick: () -> Unit,
     onChineseLyricClick: () -> Unit,
     onChineseProverbClick: () -> Unit,
+    onChineseQuoteClick: () -> Unit,
     onChineseRiddleClick: () -> Unit,
     onChineseTongueTwisterClick: () -> Unit,
     onChineseWisecrackClick: () -> Unit,
@@ -47,6 +49,7 @@ fun NavGraphBuilder.homeGraph(
             route = ROUTE_HOME
         ) {
             HomeRoute(
+                onChinaWorldCultureHeritageClick = onChinaWorldCultureHeritageClick,
                 onChineseAntitheticalCoupletClick = onChineseAntitheticalCoupletClick,
                 onChineseCharacterClick = onChineseCharacterClick,
                 onChineseExpressionClick = onChineseExpressionClick,
@@ -54,6 +57,7 @@ fun NavGraphBuilder.homeGraph(
                 onChineseKnowledgeClick = onChineseKnowledgeClick,
                 onChineseLyricClick = onChineseLyricClick,
                 onChineseProverbClick = onChineseProverbClick,
+                onChineseQuoteClick = onChineseQuoteClick,
                 onChineseRiddleClick = onChineseRiddleClick,
                 onChineseTongueTwisterClick = onChineseTongueTwisterClick,
                 onChineseWisecrackClick = onChineseWisecrackClick,

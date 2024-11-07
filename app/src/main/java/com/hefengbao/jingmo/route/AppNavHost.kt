@@ -12,6 +12,10 @@ package com.hefengbao.jingmo.route
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.hefengbao.jingmo.ui.screen.china.worldcultureheritage.nav.chinaWorldCultureHeritageGraph
+import com.hefengbao.jingmo.ui.screen.china.worldcultureheritage.nav.chinaWorldCultureHeritageShowScreen
+import com.hefengbao.jingmo.ui.screen.china.worldcultureheritage.nav.navigateToChinaWorldCultureHeritageGraph
+import com.hefengbao.jingmo.ui.screen.china.worldcultureheritage.nav.navigateToChinaWorldCultureHeritageShowScreen
 import com.hefengbao.jingmo.ui.screen.chinese.antitheticalcouplet.nav.chineseAntitheticalCoupletBookmarksScreen
 import com.hefengbao.jingmo.ui.screen.chinese.antitheticalcouplet.nav.chineseAntitheticalCoupletCaptureScreen
 import com.hefengbao.jingmo.ui.screen.chinese.antitheticalcouplet.nav.chineseAntitheticalCoupletIndexGraph
@@ -90,6 +94,16 @@ import com.hefengbao.jingmo.ui.screen.chinese.proverb.nav.navigateToChineseProve
 import com.hefengbao.jingmo.ui.screen.chinese.proverb.nav.navigateToChineseProverbReadScreen
 import com.hefengbao.jingmo.ui.screen.chinese.proverb.nav.navigateToChineseProverbSearchScreen
 import com.hefengbao.jingmo.ui.screen.chinese.proverb.nav.navigateToChineseProverbShowScreen
+import com.hefengbao.jingmo.ui.screen.chinese.quote.nav.chineseQuoteBookmarksScreen
+import com.hefengbao.jingmo.ui.screen.chinese.quote.nav.chineseQuoteIndexGraph
+import com.hefengbao.jingmo.ui.screen.chinese.quote.nav.chineseQuoteReadScreen
+import com.hefengbao.jingmo.ui.screen.chinese.quote.nav.chineseQuoteSearchScreen
+import com.hefengbao.jingmo.ui.screen.chinese.quote.nav.chineseQuoteShowScreen
+import com.hefengbao.jingmo.ui.screen.chinese.quote.nav.navigateToChineseQuoteBookmarksScreen
+import com.hefengbao.jingmo.ui.screen.chinese.quote.nav.navigateToChineseQuoteIndexGraph
+import com.hefengbao.jingmo.ui.screen.chinese.quote.nav.navigateToChineseQuoteReadScreen
+import com.hefengbao.jingmo.ui.screen.chinese.quote.nav.navigateToChineseQuoteSearchScreen
+import com.hefengbao.jingmo.ui.screen.chinese.quote.nav.navigateToChineseQuoteShowScreen
 import com.hefengbao.jingmo.ui.screen.chinese.riddle.nav.chineseRiddleIndexGraph
 import com.hefengbao.jingmo.ui.screen.chinese.riddle.nav.chineseRiddleInfoScreen
 import com.hefengbao.jingmo.ui.screen.chinese.riddle.nav.chineseRiddleReadScreen
@@ -190,6 +204,7 @@ fun AppNavHost(
         startDestination = ROUTE_HOME_GRAPH
     ) {
         homeGraph(
+            onChinaWorldCultureHeritageClick = { navController.navigateToChinaWorldCultureHeritageGraph() },
             onChineseAntitheticalCoupletClick = { navController.navigateToChineseAntitheticalCoupletIndexGraph() },
             onChineseCharacterClick = { navController.navigateToChineseCharacterIndexGraph() },
             onChineseExpressionClick = { navController.navigateToChineseExpressionGraph() },
@@ -197,6 +212,7 @@ fun AppNavHost(
             onChineseKnowledgeClick = { navController.navigateToChineseKnowledgeIndexGraph() },
             onChineseLyricClick = { navController.navigateToChineseLyricIndexGraph() },
             onChineseProverbClick = { navController.navigateToChineseProverbIndexGraph() },
+            onChineseQuoteClick = navController::navigateToChineseQuoteIndexGraph,
             onChineseRiddleClick = { navController.navigateToChineseRiddleIndexGraph() },
             onChineseTongueTwisterClick = { navController.navigateToChineseTongueTwisterIndexGraph() },
             onChineseWisecrackClick = { navController.navigateToChineseWisecrackIndexGraph() },
@@ -210,6 +226,14 @@ fun AppNavHost(
             onLinksClick = { navController.navigateToLinkIndexScreen() },
             onSettingsClick = { navController.navigateToSettingsGraph() },
             nestGraph = {
+                chinaWorldCultureHeritageGraph(
+                    onBackClick = navController::navigateUp,
+                    onItemClick = { navController.navigateToChinaWorldCultureHeritageShowScreen(it) }
+                ) {
+                    chinaWorldCultureHeritageShowScreen(
+                        onBackClick = navController::navigateUp
+                    )
+                }
                 chineseAntitheticalCoupletIndexGraph(
                     onBackClick = navController::navigateUp,
                     onReadMoreClick = { navController.navigateToChineseAntitheticalCoupletReadScreen() },
@@ -418,6 +442,28 @@ fun AppNavHost(
                             onItemClick = { navController.navigateToChineseProverbShowScreen(it.toString()) }
                         )
                         chineseProverbShowScreen(
+                            onBackClick = navController::navigateUp
+                        )
+                    }
+                )
+                chineseQuoteIndexGraph(
+                    onBackClick = navController::navigateUp,
+                    onBookmarksClick = navController::navigateToChineseQuoteBookmarksScreen,
+                    onReadMoreClick = navController::navigateToChineseQuoteReadScreen,
+                    onSearchClick = navController::navigateToChineseQuoteSearchScreen,
+                    nestGraph = {
+                        chineseQuoteBookmarksScreen(
+                            onBackClick = navController::navigateUp,
+                            onItemClick = navController::navigateToChineseQuoteShowScreen
+                        )
+                        chineseQuoteReadScreen(
+                            onBackClick = navController::navigateUp
+                        )
+                        chineseQuoteSearchScreen(
+                            onBackClick = navController::navigateUp,
+                            onItemClick = navController::navigateToChineseQuoteShowScreen
+                        )
+                        chineseQuoteShowScreen(
                             onBackClick = navController::navigateUp
                         )
                     }

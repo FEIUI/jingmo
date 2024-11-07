@@ -16,6 +16,7 @@ import androidx.room.RenameColumn
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.AutoMigrationSpec
+import com.hefengbao.jingmo.data.database.dao.ChinaWorldCulturalHeritageDao
 import com.hefengbao.jingmo.data.database.dao.ChineseAntitheticalCoupletDao
 import com.hefengbao.jingmo.data.database.dao.ChineseDictionaryDao
 import com.hefengbao.jingmo.data.database.dao.ChineseExpressionDao
@@ -23,6 +24,7 @@ import com.hefengbao.jingmo.data.database.dao.ChineseIdiomDao
 import com.hefengbao.jingmo.data.database.dao.ChineseKnowledgeDao
 import com.hefengbao.jingmo.data.database.dao.ChineseLyricDao
 import com.hefengbao.jingmo.data.database.dao.ChineseProverbDao
+import com.hefengbao.jingmo.data.database.dao.ChineseQuoteDao
 import com.hefengbao.jingmo.data.database.dao.ChineseRiddleDao
 import com.hefengbao.jingmo.data.database.dao.ChineseTongueTwisterDao
 import com.hefengbao.jingmo.data.database.dao.ChineseWisecrackDao
@@ -30,6 +32,7 @@ import com.hefengbao.jingmo.data.database.dao.ClassicalLiteratureClassicPoemDao
 import com.hefengbao.jingmo.data.database.dao.ClassicalLiteraturePeopleDao
 import com.hefengbao.jingmo.data.database.dao.ClassicalLiteratureSentenceDao
 import com.hefengbao.jingmo.data.database.dao.ClassicalLiteratureWritingDao
+import com.hefengbao.jingmo.data.database.entity.china.WorldCulturalHeritageEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.AntitheticalCoupletCollectionEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.AntitheticalCoupletEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.DictionaryCollectionEntity
@@ -48,6 +51,9 @@ import com.hefengbao.jingmo.data.database.entity.chinese.LyricFtsEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.ProverbCollectionEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.ProverbEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.ProverbFtsEntity
+import com.hefengbao.jingmo.data.database.entity.chinese.QuoteCollectionEntity
+import com.hefengbao.jingmo.data.database.entity.chinese.QuoteEntity
+import com.hefengbao.jingmo.data.database.entity.chinese.QuoteFtsEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.RiddleEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.TongueTwisterEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.WisecrackCollectionEntity
@@ -104,10 +110,14 @@ import com.hefengbao.jingmo.data.database.util.WritingQuoteListConverter
         ProverbEntity::class,
         ProverbCollectionEntity::class,
         ProverbFtsEntity::class,
+        QuoteCollectionEntity::class,
+        QuoteEntity::class,
+        QuoteFtsEntity::class,
         RiddleEntity::class,
         TongueTwisterEntity::class,
+        WorldCulturalHeritageEntity::class,
     ],
-    version = 22,
+    version = 24,
     autoMigrations = [
         AutoMigration(from = 1, to = 2),
         AutoMigration(from = 2, to = 3),
@@ -130,6 +140,8 @@ import com.hefengbao.jingmo.data.database.util.WritingQuoteListConverter
         AutoMigration(from = 19, to = 20),
         AutoMigration(from = 20, to = 21),
         AutoMigration(from = 21, to = 22),
+        AutoMigration(from = 22, to = 23),
+        AutoMigration(from = 23, to = 24),
     ],
     exportSchema = true
 )
@@ -146,6 +158,7 @@ import com.hefengbao.jingmo.data.database.util.WritingQuoteListConverter
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun antitheticalCoupletDao(): ChineseAntitheticalCoupletDao
+    abstract fun chineseQuoteDao(): ChineseQuoteDao
     abstract fun expressionDao(): ChineseExpressionDao
     abstract fun knowledgeDao(): ChineseKnowledgeDao
     abstract fun wisecrackDao(): ChineseWisecrackDao
@@ -159,6 +172,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun peopleDao(): ClassicalLiteraturePeopleDao
     abstract fun sentenceDao(): ClassicalLiteratureSentenceDao
     abstract fun writingDao(): ClassicalLiteratureWritingDao
+    abstract fun worldCulturalHeritageDao(): ChinaWorldCulturalHeritageDao
 
     @DeleteTable(
         tableName = "poems"

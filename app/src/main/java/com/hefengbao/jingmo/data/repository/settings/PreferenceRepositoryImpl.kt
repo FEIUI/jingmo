@@ -25,6 +25,9 @@ class PreferenceRepositoryImpl @Inject constructor(
 ) : PreferenceRepository {
     override fun getDatasetStatus(): Flow<DatasetVersion> = dataset.datasetVersion
 
+    override suspend fun setChinaWorldCultureHeritageVersion(version: Int) =
+        dataset.setChinsWorldCultureHeritageVersion(version)
+
     override suspend fun setChineseAntitheticalVersion(version: Int) =
         dataset.setChineseAntitheticalCoupletVersion(version)
 
@@ -45,6 +48,9 @@ class PreferenceRepositoryImpl @Inject constructor(
 
     override suspend fun setChineseProverbVersion(version: Int) =
         dataset.setChineseProverbVersion(version)
+
+    override suspend fun setChineseQuoteVersion(version: Int) =
+        dataset.setChineseQuoteVersion(version)
 
     override suspend fun setChineseRiddleVersion(version: Int) =
         dataset.setChineseRiddleVersion(version)
@@ -79,6 +85,9 @@ class PreferenceRepositoryImpl @Inject constructor(
         readStatus.setChineseAntitheticalCoupletLastReadId(id)
 
     override suspend fun setChineseIdiomLastReadId(id: Int) = readStatus.setIdiomsLastReadId(id)
+
+    override suspend fun setChineseQuoteLastReadId(id: Int) =
+        readStatus.setChineseQuoteLastReadId(id)
 
     override suspend fun setChineseKnowledgeLastReadId(id: Int) =
         readStatus.setChineseKnowledgeLastReadId(id)

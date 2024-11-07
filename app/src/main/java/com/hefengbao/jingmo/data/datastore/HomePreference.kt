@@ -38,6 +38,7 @@ class HomePreference(
 ) {
     val homeItem: Flow<HomeItem> = context.home.data.map {
         HomeItem(
+            chinaWorldCulturalHeritage = it[PREF_CHINA_WORLD_CULTURE_HERITAGE] ?: true,
             classicalLiteratureClassicPoem = it[PREF_CLASSICAL_LITERATURE_CLASSIC_POEM] ?: true,
             classicalLiteraturePeople = it[PREF_CLASSICAL_LITERATURE_PEOPLE] ?: true,
             classicalLiteratureSentence = it[PREF_CLASSICAL_LITERATURE_SENTENCE] ?: true,
@@ -49,6 +50,7 @@ class HomePreference(
             chineseKnowledge = it[PREF_CHINESE_KNOWLEDGE] ?: true,
             chineseLyric = it[PREF_CHINESE_LYRIC] ?: true,
             chineseProverb = it[PREF_CHINESE_PROVERB] ?: true,
+            chineseQuote = it[PREF_CHINESE_QUOTE] ?: true,
             chineseRiddle = it[PREF_CHINESE_RIDDLE] ?: true,
             chineseTongueTwister = it[PREF_CHINESE_TONGUE_TWISTER] ?: true,
             chineseWisecrack = it[PREF_CHINESE_WISECRACK] ?: true,
@@ -57,6 +59,9 @@ class HomePreference(
             traditionalCultureSolarTerm = it[PREF_TRADITIONAL_CULTURE_SOLAR_TERM] ?: true,
         )
     }
+
+    suspend fun setChinaWorldCultureHeritage(checked: Boolean) =
+        setBoolean(context, PREF_CHINA_WORLD_CULTURE_HERITAGE, checked)
 
     suspend fun setClassicalLiteratureClassicPoem(checked: Boolean) =
         setBoolean(context, PREF_CLASSICAL_LITERATURE_CLASSIC_POEM, checked)
@@ -101,6 +106,9 @@ class HomePreference(
     suspend fun setChineseProverb(checked: Boolean) =
         setBoolean(context, PREF_CHINESE_PROVERB, checked)
 
+    suspend fun setChineseQuote(checked: Boolean) =
+        setBoolean(context, PREF_CHINESE_QUOTE, checked)
+
     suspend fun setChineseRiddle(checked: Boolean) =
         setBoolean(context, PREF_CHINESE_RIDDLE, checked)
 
@@ -129,6 +137,10 @@ class HomePreference(
         private val PREF_TRADITIONAL_CULTURE_SOLAR_TERM =
             booleanPreferencesKey("key_traditional_culture_solar_term")
 
+        // 中国
+        private val PREF_CHINA_WORLD_CULTURE_HERITAGE =
+            booleanPreferencesKey("key_china_world_culture_heritage")
+
         // 汉语
         private val PREF_CHINESE_ANTITHETICAL_COUPLET =
             booleanPreferencesKey("key_chinese_antithetical_couplet")
@@ -138,6 +150,7 @@ class HomePreference(
         private val PREF_CHINESE_KNOWLEDGE = booleanPreferencesKey("key_chinese_knowledge")
         private val PREF_CHINESE_LYRIC = booleanPreferencesKey("key_chinese_lyric")
         private val PREF_CHINESE_PROVERB = booleanPreferencesKey("key_chinese_proverb")
+        private val PREF_CHINESE_QUOTE = booleanPreferencesKey("key_chinese_quote")
         private val PREF_CHINESE_RIDDLE = booleanPreferencesKey("key_chinese_riddle")
         private val PREF_CHINESE_TONGUE_TWISTER =
             booleanPreferencesKey("key_chinese_tongue_twister")

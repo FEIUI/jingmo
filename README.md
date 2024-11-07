@@ -29,6 +29,8 @@ Gitee:[https://gitee.com/hefengbao/jingmo](https://gitee.com/hefengbao/jingmo)
 11. 词典 320349 词；
 12. 歌词 499 首;
 13. 谚语 489 组；
+14. 句子 326 段；
+15. 中国的世界文化遗产 44 个；
 
 数据来自网络，或有内容错误，欢迎纠错，请在公众号留言。
 
@@ -118,7 +120,7 @@ keyPassword=
 
 ~本项目使用的数据位于 `app/src/main/assets` 目录下，有需要的请自取😀~
 
-1.6.0 及之前，本项目使用的数据位于 `app/src/main/assets` 目录下，1.6.1 及以后，放在如下仓库里: `hefengbao/jingmo-data`、`hefengbao/jingmo-data2`, 具体在 `gh-pages` 分支。
+1.6.0 及之前，本项目使用的数据位于 `app/src/main/assets` 目录下，1.6.1 及以后，放在如下仓库里: `hefengbao/jingmo-data`、`hefengbao/jingmo-data2`、`hefengbao/jingmo-data3`, 具体在 `gh-pages` 分支。
 
 ## Github Star History
 

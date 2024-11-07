@@ -13,6 +13,7 @@ import android.content.Context
 import androidx.room.Room.databaseBuilder
 import com.hefengbao.jingmo.common.Constant
 import com.hefengbao.jingmo.data.database.AppDatabase
+import com.hefengbao.jingmo.data.database.dao.ChinaWorldCulturalHeritageDao
 import com.hefengbao.jingmo.data.database.dao.ChineseAntitheticalCoupletDao
 import com.hefengbao.jingmo.data.database.dao.ChineseDictionaryDao
 import com.hefengbao.jingmo.data.database.dao.ChineseExpressionDao
@@ -20,6 +21,7 @@ import com.hefengbao.jingmo.data.database.dao.ChineseIdiomDao
 import com.hefengbao.jingmo.data.database.dao.ChineseKnowledgeDao
 import com.hefengbao.jingmo.data.database.dao.ChineseLyricDao
 import com.hefengbao.jingmo.data.database.dao.ChineseProverbDao
+import com.hefengbao.jingmo.data.database.dao.ChineseQuoteDao
 import com.hefengbao.jingmo.data.database.dao.ChineseRiddleDao
 import com.hefengbao.jingmo.data.database.dao.ChineseTongueTwisterDao
 import com.hefengbao.jingmo.data.database.dao.ChineseWisecrackDao
@@ -46,6 +48,12 @@ object DatabaseModule {
         AppDatabase::class.java,
         Constant.DB_NAME,
     ).build()
+
+    @Provides
+    @Singleton
+    fun providesChinaWorldCultureHeritageDao(
+        database: AppDatabase
+    ): ChinaWorldCulturalHeritageDao = database.worldCulturalHeritageDao()
 
     @Provides
     @Singleton
@@ -94,6 +102,12 @@ object DatabaseModule {
     fun providesChineseProverbDao(
         database: AppDatabase
     ): ChineseProverbDao = database.proverbDao()
+
+    @Provides
+    @Singleton
+    fun providesChineseQuoteDao(
+        database: AppDatabase
+    ): ChineseQuoteDao = database.chineseQuoteDao()
 
     @Provides
     @Singleton

@@ -50,6 +50,7 @@ import com.hefengbao.jingmo.data.model.HomeItem
 @Composable
 fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
+    onChinaWorldCultureHeritageClick: () -> Unit,
     onChineseAntitheticalCoupletClick: () -> Unit,
     onChineseCharacterClick: () -> Unit,
     onChineseExpressionClick: () -> Unit,
@@ -57,6 +58,7 @@ fun HomeRoute(
     onChineseKnowledgeClick: () -> Unit,
     onChineseLyricClick: () -> Unit,
     onChineseProverbClick: () -> Unit,
+    onChineseQuoteClick: () -> Unit,
     onChineseRiddleClick: () -> Unit,
     onChineseTongueTwisterClick: () -> Unit,
     onChineseWisecrackClick: () -> Unit,
@@ -75,6 +77,7 @@ fun HomeRoute(
 
     HomeScreen(
         homeItem = homeItem,
+        onChinaWorldCultureHeritageClick = onChinaWorldCultureHeritageClick,
         onChineseAntitheticalCoupletClick = onChineseAntitheticalCoupletClick,
         onChineseCharacterClick = onChineseCharacterClick,
         onChineseExpressionClick = onChineseExpressionClick,
@@ -82,6 +85,7 @@ fun HomeRoute(
         onChineseKnowledgeClick = onChineseKnowledgeClick,
         onChineseLyricClick = onChineseLyricClick,
         onChineseProverbClick = onChineseProverbClick,
+        onChineseQuoteClick = onChineseQuoteClick,
         onChineseRiddleClick = onChineseRiddleClick,
         onChineseTongueTwisterClick = onChineseTongueTwisterClick,
         onChineseWisecrackClick = onChineseWisecrackClick,
@@ -104,6 +108,7 @@ fun HomeRoute(
 private fun HomeScreen(
     modifier: Modifier = Modifier,
     homeItem: HomeItem,
+    onChinaWorldCultureHeritageClick: () -> Unit,
     onChineseAntitheticalCoupletClick: () -> Unit,
     onChineseCharacterClick: () -> Unit,
     onChineseExpressionClick: () -> Unit,
@@ -111,6 +116,7 @@ private fun HomeScreen(
     onChineseKnowledgeClick: () -> Unit,
     onChineseLyricClick: () -> Unit,
     onChineseProverbClick: () -> Unit,
+    onChineseQuoteClick: () -> Unit,
     onChineseRiddleClick: () -> Unit,
     onChineseTongueTwisterClick: () -> Unit,
     onChineseWisecrackClick: () -> Unit,
@@ -296,6 +302,14 @@ private fun HomeScreen(
                                 )
                             }
                         }
+                        if (homeItem.chineseQuote) {
+                            item {
+                                Item(
+                                    title = "句子",
+                                    onClick = onChineseQuoteClick
+                                )
+                            }
+                        }
                     }
 
                     if (homeItem.traditionalCultureGroup) {
@@ -325,6 +339,21 @@ private fun HomeScreen(
                                 Item(
                                     title = "颜色",
                                     onClick = onTraditionalCultureColorClick
+                                )
+                            }
+                        }
+                    }
+                    if (homeItem.chinaGroup) {
+                        item(
+                            span = { GridItemSpan(2) }
+                        ) {
+                            Title(text = "中国")
+                        }
+                        if (homeItem.chinaWorldCulturalHeritage) {
+                            item {
+                                Item(
+                                    title = "世界文化遗产",
+                                    onClick = onChinaWorldCultureHeritageClick
                                 )
                             }
                         }

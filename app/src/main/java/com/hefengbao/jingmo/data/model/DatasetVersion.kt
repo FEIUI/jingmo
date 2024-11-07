@@ -10,9 +10,11 @@
 package com.hefengbao.jingmo.data.model
 
 data class DatasetVersion(
+    val chinaWorldCulturalHeritageVersion: Int = 0,
     val chineseAntitheticalCoupletVersion: Int = 0,
     val chineseExpressionVersion: Int = 0,
     val chineseKnowledgeVersion: Int = 0,
+    val chineseQuoteVersion: Int = 0,
     val chineseWisecracksVersion: Int = 0,
     val classicPoemsVersion: Int = 0,
     val dictionaryVersion: Int = 0,

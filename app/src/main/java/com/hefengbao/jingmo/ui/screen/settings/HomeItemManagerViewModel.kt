@@ -34,6 +34,12 @@ class HomeItemManagerViewModel @Inject constructor(
         }
     }
 
+    fun setChinaWorldCultureHeritage(checked: Boolean) {
+        viewModelScope.launch {
+            repository.setChinaWorldCultureHeritage(checked)
+        }
+    }
+
     fun setClassicalLiteratureClassicPoem(checked: Boolean) {
         viewModelScope.launch {
             repository.setClassicalLiteratureClassicPoem(checked)
@@ -97,6 +103,12 @@ class HomeItemManagerViewModel @Inject constructor(
     fun setChineseProverb(checked: Boolean) {
         viewModelScope.launch {
             repository.setChineseProverb(checked)
+        }
+    }
+
+    fun setChineseQuote(checked: Boolean) {
+        viewModelScope.launch {
+            repository.setChineseQuote(checked)
         }
     }
 

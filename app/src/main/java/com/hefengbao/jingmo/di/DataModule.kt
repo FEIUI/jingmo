@@ -11,6 +11,8 @@ package com.hefengbao.jingmo.di
 
 import com.hefengbao.jingmo.data.repository.LinksRepository
 import com.hefengbao.jingmo.data.repository.LinksRepositoryImpl
+import com.hefengbao.jingmo.data.repository.china.WorldCultureHeritageRepository
+import com.hefengbao.jingmo.data.repository.china.WorldCultureHeritageRepositoryImpl
 import com.hefengbao.jingmo.data.repository.chinese.AntitheticalCoupletRepository
 import com.hefengbao.jingmo.data.repository.chinese.AntitheticalCoupletRepositoryImpl
 import com.hefengbao.jingmo.data.repository.chinese.CharacterRepository
@@ -25,6 +27,8 @@ import com.hefengbao.jingmo.data.repository.chinese.LyricRepository
 import com.hefengbao.jingmo.data.repository.chinese.LyricRepositoryImpl
 import com.hefengbao.jingmo.data.repository.chinese.ProverbRepository
 import com.hefengbao.jingmo.data.repository.chinese.ProverbRepositoryImpl
+import com.hefengbao.jingmo.data.repository.chinese.QuoteRepository
+import com.hefengbao.jingmo.data.repository.chinese.QuoteRepositoryImpl
 import com.hefengbao.jingmo.data.repository.chinese.RiddleRepository
 import com.hefengbao.jingmo.data.repository.chinese.RiddleRepositoryImpl
 import com.hefengbao.jingmo.data.repository.chinese.TongueTwisterRepository
@@ -65,6 +69,11 @@ import dagger.hilt.components.SingletonComponent
 interface DataModule {
 
     @Binds
+    fun bindsChinaWorldCultureHeritageRepository(
+        repository: WorldCultureHeritageRepositoryImpl
+    ): WorldCultureHeritageRepository
+
+    @Binds
     fun bindsChineseAntitheticalCoupletRepository(
         repository: AntitheticalCoupletRepositoryImpl
     ): AntitheticalCoupletRepository
@@ -83,6 +92,11 @@ interface DataModule {
     fun bindsChineseExpressionRepository(
         chineseExpressionRepositoryImpl: ExpressionRepositoryImpl
     ): ExpressionRepository
+
+    @Binds
+    fun bindsChineseQuoteRepository(
+        repository: QuoteRepositoryImpl
+    ): QuoteRepository
 
     @Binds
     fun bindsChineseKnowledgeRepository(

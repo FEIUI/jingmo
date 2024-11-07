@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hefengbao.jingmo.data.database.entity.chinese.DictionaryPinyinEntity
 import com.hefengbao.jingmo.data.datastore.DatasetPreference
+import com.hefengbao.jingmo.data.model.china.WorldCulturalHeritage
+import com.hefengbao.jingmo.data.model.china.asWorldCulturalHeritageEntity
 import com.hefengbao.jingmo.data.model.chinese.AntitheticalCouplet
 import com.hefengbao.jingmo.data.model.chinese.ChineseKnowledge
 import com.hefengbao.jingmo.data.model.chinese.ChineseWisecrack
@@ -23,6 +25,7 @@ import com.hefengbao.jingmo.data.model.chinese.ExpressionWrapper
 import com.hefengbao.jingmo.data.model.chinese.IdiomWrapper
 import com.hefengbao.jingmo.data.model.chinese.Lyric
 import com.hefengbao.jingmo.data.model.chinese.Proverb
+import com.hefengbao.jingmo.data.model.chinese.Quote
 import com.hefengbao.jingmo.data.model.chinese.Riddle
 import com.hefengbao.jingmo.data.model.chinese.TongueTwister
 import com.hefengbao.jingmo.data.model.chinese.asAntitheticalCoupletEntity
@@ -33,6 +36,7 @@ import com.hefengbao.jingmo.data.model.chinese.asDictionaryEntity
 import com.hefengbao.jingmo.data.model.chinese.asIdiomEntity
 import com.hefengbao.jingmo.data.model.chinese.asLyricEntity
 import com.hefengbao.jingmo.data.model.chinese.asProverbEntity
+import com.hefengbao.jingmo.data.model.chinese.asQuoteEntity
 import com.hefengbao.jingmo.data.model.chinese.asRiddleEntity
 import com.hefengbao.jingmo.data.model.chinese.asTongueTwisterEntity
 import com.hefengbao.jingmo.data.model.classicalliterature.ClassicPoem
@@ -68,10 +72,12 @@ class ImportViewModel @Inject constructor(
     private val repository: ImportRepository,
     private val preference: DatasetPreference,
 ) : ViewModel() {
+    private val chinaWorldCultureHeritageCount = 44
     private val chineseAntitheticalCoupletCount = 490
     private val chineseExpressionCount = 320349
     private val chineseKnowledgeCount = 464
     private val chineseProverbsCount = 964
+    private val chineseQuotesCount = 362
     private val chineseWisecracksCount = 14026
     private val classicPoemCount = 955
     private val dictionaryCount = 20552
@@ -82,6 +88,38 @@ class ImportViewModel @Inject constructor(
     private val chineseRiddlesCount = 42446
     private val tongueTwistersCount = 45
     private val writingsCount = 1144422
+
+    val chinaWorldCultureHeritageRatio =
+        repository.chinaChinaWorldCultureHeritageTotal().distinctUntilChanged().flatMapLatest {
+            MutableStateFlow(it.toFloat() / chinaWorldCultureHeritageCount)
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = 0f
+        )
+    private val _chinaWorldCultureHeritageStatus: MutableStateFlow<ImportStatus<Any>> =
+        MutableStateFlow(ImportStatus.Finish)
+    val chinaWorldCultureHeritageStatus: SharedFlow<ImportStatus<Any>> =
+        _chinaWorldCultureHeritageStatus
+
+    fun chinaWorldCultureHeritage(uris: List<Uri>) {
+        viewModelScope.launch {
+            _chinaWorldCultureHeritageStatus.value = ImportStatus.Loading
+            uris.forEach {
+                json.decodeFromString<List<WorldCulturalHeritage>>(readTextFromUri(it))
+                    .forEach { worldCulturalHeritage ->
+                        repository.insertChinaWorldCultureHeritage(worldCulturalHeritage.asWorldCulturalHeritageEntity())
+                    }
+            }
+            _chinaWorldCultureHeritageStatus.value = ImportStatus.Finish
+        }
+    }
+
+    fun clearChinaWorldCultureHeritage() {
+        viewModelScope.launch {
+            repository.clearChinaWorldCultureHeritage()
+        }
+    }
 
     val chineseAntitheticalCoupletRatio =
         repository.chineseAntitheticalCoupletTotal().distinctUntilChanged().flatMapLatest {
@@ -175,6 +213,37 @@ class ImportViewModel @Inject constructor(
         viewModelScope.launch {
             repository.clearChineseProverbs()
             preference.setChineseProverbVersion(0)
+        }
+    }
+
+    val chineseQuotesRatio =
+        repository.chineseQuoteTotal().distinctUntilChanged().flatMapLatest {
+            MutableStateFlow(it.toFloat() / chineseQuotesCount)
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = 0f
+        )
+    private val _chineseQuotesStatus: MutableStateFlow<ImportStatus<Any>> =
+        MutableStateFlow(ImportStatus.Finish)
+    val chineseQuotesStatus: SharedFlow<ImportStatus<Any>> = _chineseQuotesStatus
+    fun chineseQuotes(uris: List<Uri>) {
+        viewModelScope.launch {
+            _chineseQuotesStatus.value = ImportStatus.Loading
+            uris.forEach {
+                json.decodeFromString<List<Quote>>(readTextFromUri(it))
+                    .forEach { quote ->
+                        repository.insertChineseQuote(quote.asQuoteEntity())
+                    }
+            }
+            _chineseQuotesStatus.value = ImportStatus.Finish
+        }
+    }
+
+    fun clearChineseQuotes() {
+        viewModelScope.launch {
+            repository.clearChineseQuotes()
+            preference.setChineseQuoteVersion(0)
         }
     }
 

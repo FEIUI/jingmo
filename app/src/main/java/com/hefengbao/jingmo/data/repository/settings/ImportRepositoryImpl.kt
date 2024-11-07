@@ -9,6 +9,7 @@
 
 package com.hefengbao.jingmo.data.repository.settings
 
+import com.hefengbao.jingmo.data.database.dao.ChinaWorldCulturalHeritageDao
 import com.hefengbao.jingmo.data.database.dao.ChineseAntitheticalCoupletDao
 import com.hefengbao.jingmo.data.database.dao.ChineseDictionaryDao
 import com.hefengbao.jingmo.data.database.dao.ChineseExpressionDao
@@ -16,6 +17,7 @@ import com.hefengbao.jingmo.data.database.dao.ChineseIdiomDao
 import com.hefengbao.jingmo.data.database.dao.ChineseKnowledgeDao
 import com.hefengbao.jingmo.data.database.dao.ChineseLyricDao
 import com.hefengbao.jingmo.data.database.dao.ChineseProverbDao
+import com.hefengbao.jingmo.data.database.dao.ChineseQuoteDao
 import com.hefengbao.jingmo.data.database.dao.ChineseRiddleDao
 import com.hefengbao.jingmo.data.database.dao.ChineseTongueTwisterDao
 import com.hefengbao.jingmo.data.database.dao.ChineseWisecrackDao
@@ -23,6 +25,7 @@ import com.hefengbao.jingmo.data.database.dao.ClassicalLiteratureClassicPoemDao
 import com.hefengbao.jingmo.data.database.dao.ClassicalLiteraturePeopleDao
 import com.hefengbao.jingmo.data.database.dao.ClassicalLiteratureSentenceDao
 import com.hefengbao.jingmo.data.database.dao.ClassicalLiteratureWritingDao
+import com.hefengbao.jingmo.data.database.entity.china.WorldCulturalHeritageEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.AntitheticalCoupletEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.DictionaryEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.DictionaryPinyinEntity
@@ -31,6 +34,7 @@ import com.hefengbao.jingmo.data.database.entity.chinese.IdiomEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.KnowledgeEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.LyricEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.ProverbEntity
+import com.hefengbao.jingmo.data.database.entity.chinese.QuoteEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.RiddleEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.TongueTwisterEntity
 import com.hefengbao.jingmo.data.database.entity.chinese.WisecrackEntity
@@ -42,6 +46,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ImportRepositoryImpl @Inject constructor(
+    private val chinaWorldCulturalHeritageDao: ChinaWorldCulturalHeritageDao,
     private val chineseAntitheticalCoupletDao: ChineseAntitheticalCoupletDao,
     private val chineseExpressionDao: ChineseExpressionDao,
     private val chineseWisecrackDao: ChineseWisecrackDao,
@@ -50,6 +55,7 @@ class ImportRepositoryImpl @Inject constructor(
     private val chineseIdiomDao: ChineseIdiomDao,
     private val chineseLyricDao: ChineseLyricDao,
     private val chineseProverbDao: ChineseProverbDao,
+    private val chineseQuoteDao: ChineseQuoteDao,
     private val chineseRiddleDao: ChineseRiddleDao,
     private val classicalLiteraturePeopleDao: ClassicalLiteraturePeopleDao,
     private val classicalLiteratureClassicPoemDao: ClassicalLiteratureClassicPoemDao,
@@ -57,6 +63,12 @@ class ImportRepositoryImpl @Inject constructor(
     private val chineseTongueTwisterDao: ChineseTongueTwisterDao,
     private val classicalLiteratureWritingDao: ClassicalLiteratureWritingDao
 ) : ImportRepository {
+    override suspend fun insertChinaWorldCultureHeritage(entity: WorldCulturalHeritageEntity) =
+        chinaWorldCulturalHeritageDao.insert(entity)
+
+    override suspend fun clearChinaWorldCultureHeritage() =
+        chinaWorldCulturalHeritageDao.clear()
+
     override suspend fun insertChineseAntitheticalCouplet(entity: AntitheticalCoupletEntity) =
         chineseAntitheticalCoupletDao.insert(entity)
 
@@ -86,6 +98,11 @@ class ImportRepositoryImpl @Inject constructor(
 
     override suspend fun clearChineseProverbs() =
         chineseProverbDao.clear()
+
+    override suspend fun insertChineseQuote(entity: QuoteEntity) =
+        chineseQuoteDao.insert(entity)
+
+    override suspend fun clearChineseQuotes() = chineseQuoteDao.clear()
 
     override suspend fun insertChineseDictionary(entity: DictionaryEntity) =
         chineseDictionaryDao.insert(entity)
@@ -144,6 +161,9 @@ class ImportRepositoryImpl @Inject constructor(
     override suspend fun clearClassicalLiteratureWritings() =
         classicalLiteratureWritingDao.clear()
 
+    override fun chinaChinaWorldCultureHeritageTotal(): Flow<Int> =
+        chinaWorldCulturalHeritageDao.total()
+
     override fun chineseAntitheticalCoupletTotal(): Flow<Int> =
         chineseAntitheticalCoupletDao.total()
 
@@ -154,6 +174,8 @@ class ImportRepositoryImpl @Inject constructor(
     override fun chineseKnowledgeTotal(): Flow<Int> = chineseKnowledgeDao.total()
 
     override fun chineseProverbTotal(): Flow<Int> = chineseProverbDao.total()
+
+    override fun chineseQuoteTotal(): Flow<Int> = chineseQuoteDao.total()
 
     override fun classicalLiteratureClassicPoemTotal(): Flow<Int> =
         classicalLiteratureClassicPoemDao.total()

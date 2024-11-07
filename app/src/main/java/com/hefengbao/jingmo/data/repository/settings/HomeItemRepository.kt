@@ -13,6 +13,7 @@ import com.hefengbao.jingmo.data.model.HomeItem
 import kotlinx.coroutines.flow.Flow
 
 interface HomeItemRepository {
+    suspend fun setChinaWorldCultureHeritage(checked: Boolean)
     suspend fun setChineseAntitheticalCouplet(checked: Boolean)
     suspend fun setChineseCharacter(checked: Boolean)
     suspend fun setChineseExpression(checked: Boolean)
@@ -20,6 +21,7 @@ interface HomeItemRepository {
     suspend fun setChineseKnowledge(checked: Boolean)
     suspend fun setChineseLyric(checked: Boolean)
     suspend fun setChineseProverb(checked: Boolean)
+    suspend fun setChineseQuote(checked: Boolean)
     suspend fun setChineseRiddle(checked: Boolean)
     suspend fun setChineseTongueTwister(checked: Boolean)
     suspend fun setChineseWisecrack(checked: Boolean)

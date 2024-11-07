@@ -10,6 +10,7 @@
 package com.hefengbao.jingmo.data.network.retrofit
 
 import com.hefengbao.jingmo.data.model.Dataset
+import com.hefengbao.jingmo.data.model.china.WorldCulturalHeritage
 import com.hefengbao.jingmo.data.model.chinese.AntitheticalCouplet
 import com.hefengbao.jingmo.data.model.chinese.ChineseKnowledge
 import com.hefengbao.jingmo.data.model.chinese.ChineseWisecrack
@@ -18,6 +19,7 @@ import com.hefengbao.jingmo.data.model.chinese.ExpressionWrapper
 import com.hefengbao.jingmo.data.model.chinese.IdiomWrapper
 import com.hefengbao.jingmo.data.model.chinese.Lyric
 import com.hefengbao.jingmo.data.model.chinese.Proverb
+import com.hefengbao.jingmo.data.model.chinese.Quote
 import com.hefengbao.jingmo.data.model.chinese.Riddle
 import com.hefengbao.jingmo.data.model.chinese.TongueTwister
 import com.hefengbao.jingmo.data.model.classicalliterature.ClassicPoem
@@ -33,9 +35,12 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private const val baseUrl = "https://hefengbao.github.io/jingmo-data/api/"
+/*private const val baseUrl = "https://hefengbao.github.io/jingmo-data/api/"
 private const val baseUrl2 = "https://hefengbao.github.io/jingmo-data2/api/"
-private const val baseUrl3 = "https://hefengbao.github.io/jingmo-data3/api/"
+private const val baseUrl3 = "https://hefengbao.github.io/jingmo-data3/api/"*/
+private const val baseUrl = "https://jingmo-data.pages.dev/api/"
+private const val baseUrl2 = "https://jingmo-data2.pages.dev/api/"
+private const val baseUrl3 = "https://jingmo-data3.pages.dev/api/"
 
 @Singleton
 class NetworkImpl @Inject constructor(
@@ -69,6 +74,9 @@ class NetworkImpl @Inject constructor(
 
     override suspend fun dataset(): List<Dataset> = networkApi.dataset()
 
+    override suspend fun chinaWorldCultureHeritage(): List<WorldCulturalHeritage> =
+        networkApi.chinaWorldCultureHeritage()
+
     override suspend fun chineseAntitheticalCouplets(): List<AntitheticalCouplet> =
         networkApi.chineseAntitheticalCouplet()
 
@@ -79,6 +87,8 @@ class NetworkImpl @Inject constructor(
 
     override suspend fun chineseWisecracks(): List<ChineseWisecrack> =
         networkApi.chineseWisecracks()
+
+    override suspend fun chineseQuotes(): List<Quote> = networkApi.chineseQuotes()
 
     override suspend fun classicPoems(): List<ClassicPoem> = networkApi.classicPoems()
 

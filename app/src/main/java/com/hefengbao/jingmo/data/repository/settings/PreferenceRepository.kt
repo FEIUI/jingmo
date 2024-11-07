@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PreferenceRepository {
     fun getDatasetStatus(): Flow<DatasetVersion>
+    suspend fun setChinaWorldCultureHeritageVersion(version: Int)
     suspend fun setChineseAntitheticalVersion(version: Int)
     suspend fun setChineseDictionaryVersion(version: Int)
     suspend fun setChineseExpressionVersion(version: Int)
@@ -23,6 +24,7 @@ interface PreferenceRepository {
     suspend fun setChineseKnowledgeVersion(version: Int)
     suspend fun setChineseLyricVersion(version: Int)
     suspend fun setChineseProverbVersion(version: Int)
+    suspend fun setChineseQuoteVersion(version: Int)
     suspend fun setChineseRiddleVersion(version: Int)
     suspend fun setChineseTongueTwisterVersion(version: Int)
     suspend fun setChineseWisecracksVersion(version: Int)
@@ -37,6 +39,7 @@ interface PreferenceRepository {
     suspend fun setChineseAntitheticalCoupletLastReadId(id: Int)
     suspend fun setChineseKnowledgeLastReadId(id: Int)
     suspend fun setChineseIdiomLastReadId(id: Int)
+    suspend fun setChineseQuoteLastReadId(id: Int)
     suspend fun setChineseRiddleLastReadId(id: Int)
     suspend fun setChineseTongueTwisterLastReadId(id: Int)
     suspend fun setChineseWisecrackLastReadId(id: Int)
