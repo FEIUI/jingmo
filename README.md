@@ -49,11 +49,26 @@ Android 8.0 及以上
 
 ## 赞助(赠人玫瑰，手有余香。)
 
-微信：
-![](screenshot/wechatpay.png)
+<div style=" display: flex;justify-content: space-between;">
+<img src="screenshot/wechatpay.png" style="width: 45%" alt="微信赞赏码">
+<img src="screenshot/alipay.jpg" style="width: 45%" alt="支付宝赞赏码">
+</div>
 
-支付宝：
-![](screenshot/alipay.jpg)
+| 平台   | 时间         | 用户      | 金额  |
+|------|------------|---------|-----|
+| 微信支付 | 2024.03.10 | zzz     | ￥5  |
+| 微信支付 | 2024.03.10 | 小明同学*   | ￥1  |
+| 微信支付 | 2024.04.28 | 初见      | ￥9  |
+| 微信支付 | 2024.05.10 | 大王叫我来巡山 | ￥9  |
+| 微信支付 | 2024.07.23 | 白鱼炖汤    | ￥19 |
+| 支付宝  | 2024.05.06 | *冉      | ￥5  |
+| 支付宝  | 2024.07.04 | **国     | ￥10 |
+| 公众号  | 2024-01-29 | 十里坡剑神   | ￥19 |
+| 公众号  | 2024-02-19 | F       | ￥5  |
+| 公众号  | 2024-03-03 | 七月流火    | ￥9  |
+| 公众号  | 2024-03-15 | 帅蜀黍     | ￥9  |
+
+感谢各位的支持！！！
 
 ## 运行项目
 
@@ -118,6 +133,8 @@ keyPassword=
 ### 其他
 
 [https://github.com/dengxiuqi/ChineseLyrics](https://github.com/dengxiuqi/ChineseLyrics)
+
+[lunar是一个支持阳历、阴历、佛历和道历的日历工具库](https://github.com/6tail/lunar-java)
 
 ~本项目使用的数据位于 `app/src/main/assets` 目录下，有需要的请自取😀~
 
