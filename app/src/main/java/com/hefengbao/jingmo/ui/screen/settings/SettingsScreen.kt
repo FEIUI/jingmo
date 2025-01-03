@@ -53,7 +53,7 @@ fun SettingsRoute(
         onDataClick = onDataClick,
         onHomeItemManagerClick = onHomeItemManagerClick,
         onImportClick = onImportClick,
-        onPrivacyClick = onPrivacyClick,
+        onPrivacyClick = onPrivacyClick
     )
 }
 
@@ -112,7 +112,6 @@ fun SettingsScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun Item(
     modifier: Modifier = Modifier,
